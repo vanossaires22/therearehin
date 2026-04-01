@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THEREareHIN | Магазин для любимых питомцев</title>
+    <!-- Подключаем красивые шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary: #FF8E3C; /* Оранжевый акцент */
+            --secondary: #2A2A2A; /* Темный текст */
+            --bg-light: #F9F9F9;
+            --white: #FFFFFF;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* HEADER */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--secondary);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #e67e32;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 142, 60, 0.4);
+        }
+
+        /* CATALOG */
+        .catalog {
+            padding: 4rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-cat {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+            font-weight: 700;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .add-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-btn:hover {
+            background: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        /* ANIMALS SECTION */
+        .animals-section {
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, #fff5eb 0%, #ffffff 100%);
+        }
+
+        .animals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .animal-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .animal-img {
+            height: 300px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .animal-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .animal-info {
+            padding: 2rem;
+        }
+
+        .animal-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .animal-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .animal-details {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-item {
+            background: var(--bg-light);
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .detail-item i {
+            color: var(--primary);
+        }
+
+        .animal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .animal-price {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .buy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .buy-btn:hover {
+            background: #e67e32;
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .socials {
+            margin-bottom: 1.5rem;
+        }
+
+        .socials a {
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .socials a:hover {
+            color: var(--primary);
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            nav ul { display: none; } /* Упрощение для мобильных */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">THERE<span>are</span>HIN</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#catalog">Товары</a></li>
+                <li><a href="#animals">Животные</a></li>
+                <li><a href="#about">О нас</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon" onclick="alert('Корзина пока в разработке, но вы уже выбрали ' + cartCount + ' товаров!')">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Счастье в каждой лапке</h1>
+            <p>Лучшие товары для ваших пушистых, пернатых и хвостатых друзей. Качество, которому доверяют питомцы.</p>
+            <a href="#animals" class="btn">Выбрать питомца</a>
+        </div>
+    </section>
+
+    <!-- Animals Section -->
+    <section class="animals-section" id="animals">
+        <h2 class="section-title">Наши питомцы ждут вас</h2>
+        
+        <div class="animals-grid">
+            <!-- Monkey -->
+            <div class="animal-card">
+                <span class="animal-badge">В наличии</span>
+                <img src="https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Обезьяна" class="animal-img">
+                <div class="animal-info">
+                    <h3 class="animal-name">Обезьяна Капуцин</h3>
+                    <p class="animal-description">Умная и игривая обезьянка. Отличный компаньон для активных людей. Любит фрукты и игры.</p>
+                    <div class="animal-details">
+                        <div class="detail-item"><i class="fas fa-ruler"></i> 30 см</div>
+                        <div class="detail-item"><i class="fas fa-weight"></i> 3 кг</div>
+                        <div class="detail-item"><i class="fas fa-heart"></i> 2 года</div>
+                    </div>
+                    <div class="animal-footer">
+                        <span class="animal-price">150 000 ₽</span>
+                        <button class="buy-btn" onclick="addToCart('Обезьяна Капуцин')">
+                            <i class="fas fa-cart-plus"></i> Купить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pug -->
+            <div class="animal-card">
+                <span class="animal-badge">Хит продаж</span>
+                <img src="https://images.unsplash.com/photo-1517423568366-697555f1f9b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Мопс" class="animal-img">
+                <div class="animal-info">
+                    <h3 class="animal-name">Мопс Арчи</h3>
+                    <p class="animal-description">Добродушный и ласковый мопс. Идеальный друг для семьи. Любит обнимашки и прогулки.</p>
+                    <div class="animal-details">
+                        <div class="detail-item"><i class="fas fa-ruler"></i> 35 см</div>
+                        <div class="detail-item"><i class="fas fa-weight"></i> 8 кг</div>
+                        <div class="detail-item"><i class="fas fa-heart"></i> 1 год</div>
+                    </div>
+                    <div class="animal-footer">
+                        <span class="animal-price">45 000 ₽</span>
+                        <button class="buy-btn" onclick="addToCart('Мопс Арчи')">
+                            <i class="fas fa-cart-plus"></i> Купить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parrot -->
+            <div class="animal-card">
+                <span class="animal-badge">В наличии</span>
+                <img src="https://images.unsplash.com/photo-1552728089-57bdde30ebd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Попугай" class="animal-img">
+                <div class="animal-info">
+                    <h3 class="animal-name">Попугай Жако</h3>
+                    <p class="animal-description">Говорящий попугай с ярким оперением. Умный и общительный. Знает 50+ слов!</p>
+                    <div class="animal-details">
+                        <div class="detail-item"><i class="fas fa-ruler"></i> 33 см</div>
+                        <div class="detail-item"><i class="fas fa-weight"></i> 0.5 кг</div>
+                        <div class="detail-item"><i class="fas fa-heart"></i> 3 года</div>
+                    </div>
+                    <div class="animal-footer">
+                        <span class="animal-price">85 000 ₽</span>
+                        <button class="buy-btn" onclick="addToCart('Попугай Жако')">
+                            <i class="fas fa-cart-plus"></i> Купить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crocodile -->
+            <div class="animal-card">
+                <span class="animal-badge">Экзотика</span>
+                <img src="https://images.unsplash.com/photo-1516934024742-b461fba47600?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Крокодил" class="animal-img">
+                <div class="animal-info">
+                    <h3 class="animal-name">Крокодил Кайман</h3>
+                    <p class="animal-description">Молодой кайман для террариума. Экзотический питомец для опытных владельцев.</p>
+                    <div class="animal-details">
+                        <div class="detail-item"><i class="fas fa-ruler"></i> 60 см</div>
+                        <div class="detail-item"><i class="fas fa-weight"></i> 5 кг</div>
+                        <div class="detail-item"><i class="fas fa-heart"></i> 6 месяцев</div>
+                    </div>
+                    <div class="animal-footer">
+                        <span class="animal-price">120 000 ₽</span>
+                        <button class="buy-btn" onclick="addToCart('Крокодил Кайман')">
+                            <i class="fas fa-cart-plus"></i> Купить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cat -->
+            <div class="animal-card">
+                <span class="animal-badge">В наличии</span>
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Кошка" class="animal-img">
+                <div class="animal-info">
+                    <h3 class="animal-name">Кошка Луна</h3>
+                    <p class="animal-description">Нежная британская кошка с голубыми глазами. Спокойная и ласковая. Приучена к лотку.</p>
+                    <div class="animal-details">
+                        <div class="detail-item"><i class="fas fa-ruler"></i> 25 см</div>
+                        <div class="detail-item"><i class="fas fa-weight"></i> 4 кг</div>
+                        <div class="detail-item"><i class="fas fa-heart"></i> 8 месяцев</div>
+                    </div>
+                    <div class="animal-footer">
+                        <span class="animal-price">35 000 ₽</span>
+                        <button class="buy-btn" onclick="addToCart('Кошка Луна')">
+                            <i class="fas fa-cart-plus"></i> Купить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mouse -->
+            <div class="animal-card">
+                <span class="animal-badge">В наличии</span>
+                <img src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Мышь" class="animal-img">
+                <div class="animal-info">
+                    <h3 class="animal-name">Мышка Пикси</h3>
+                    <p class="animal-description">Декоративная мышка. Идеальный питомец для детей. Не требует много места и ухода.</p>
+                    <div class="animal-details">
+                        <div class="detail-item"><i class="fas fa-ruler"></i> 10 см</div>
+                        <div class="detail-item"><i class="fas fa-weight"></i> 0.03 кг</div>
+                        <div class="detail-item"><i class="fas fa-heart"></i> 2 месяца</div>
+                    </div>
+                    <div class="animal-footer">
+                        <span class="animal-price">500 ₽</span>
+                        <button class="buy-btn" onclick="addToCart('Мышка Пикси')">
+                            <i class="fas fa-cart-plus"></i> Купить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chicken -->
+            <div class="animal-card">
+                <span class="animal-badge">Новинка</span>
+                <img src="https://images.unsplash.com/photo-1548550023-2bdb3c5a2d23?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Курица" class="animal-img">
+                <div class="animal-info">
+                    <h3 class="animal-name">Курица Декоративная</h3>
+                    <p class="animal-description">Карликовая декоративная курица породы Силки. Пушистая и дружелюбная. Несет яйца!</p>
+                    <div class="animal-details">
+                        <div class="detail-item"><i class="fas fa-ruler"></i> 25 см</div>
+                        <div class="detail-item"><i class="fas fa-weight"></i> 1 кг</div>
+                        <div class="detail-item"><i class="fas fa-heart"></i> 4 месяца</div>
+                    </div>
+                    <div class="animal-footer">
+                        <span class="animal-price">3 500 ₽</span>
+                        <button class="buy-btn" onclick="addToCart('Курица Декоративная')">
+                            <i class="fas fa-cart-plus"></i> Купить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog -->
+    <section class="catalog" id="catalog">
+        <h2 class="section-title">Товары для питомцев</h2>
+        
+        <div class="products-grid">
+            <!-- Товар 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Собака" class="product-img">
+                <div class="product-info">
+                    <span class="product-cat">Для собак</span>
+                    <h3 class="product-title">Ортопедический лежак "Cloud"</h3>
+                    <div class="product-footer">
+                        <span class="price">4 500 ₽</span>
+                        <button class="add-btn" onclick="addToCart('Ортопедический лежак')"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1522276498395-f4f68f7f8a9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Корм" class="product-img">
+                <div class="product-info">
+                    <span class="product-cat">Питание</span>
+                    <h3 class="product-title">Премиум корм "Nature Balance"</h3>
+                    <div class="product-footer">
+                        <span class="price">2 100 ₽</span>
+                        <button class="add-btn" onclick="addToCart('Премиум корм')"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 3 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Аксессуар" class="product-img">
+                <div class="product-info">
+                    <span class="product-cat">Аксессуары</span>
+                    <h3 class="product-title">Ошейник кожаный "Classic"</h3>
+                    <div class="product-footer">
+                        <span class="price">1 200 ₽</span>
+                        <button class="add-btn" onclick="addToCart('Ошейник кожаный')"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Товар 4 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Игрушка" class="product-img">
+                <div class="product-info">
+                    <span class="product-cat">Игрушки</span>
+                    <h3 class="product-title">Набор игрушек для кошек</h3>
+                    <div class="product-footer">
+                        <span class="price">890 ₽</span>
+                        <button class="add-btn" onclick="addToCart('Набор игрушек')"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about">
+        <div class="socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-vk"></i></a>
+        </div>
+        <p>&copy; 2023 THEREareHIN. Все права защищены.</p>
+        <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">Сделано с любовью к животным</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Товар добавлен в корзину! 🐾</div>
+
+    <script>
+        // --- JAVASCRIPT LOGIC ---
+        
+        let cartCount = 0;
+        const cartCountElement = document.getElementById('cart-count');
+        const toast = document.getElementById('toast');
+
+        function addToCart(itemName) {
+            // Увеличиваем счетчик
+            cartCount++;
+            cartCountElement.innerText = cartCount;
+
+            // Анимация кнопки корзины
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cartIcon.style.transform = 'scale(1)';
+            }, 200);
+
+            // Показываем уведомление с названием товара
+            showToast(itemName);
+        }
+
+        function showToast(itemName) {
+            toast.innerText = `${itemName} добавлен в корзину! 🐾`;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Плавный скролл для якорей
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
